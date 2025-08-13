@@ -79,7 +79,7 @@ async def progress_bar(current, total, reply, start): #NIKHIL SAINI BOTS
                 eta = hrt(eta_seconds, precision=1) #NIKHIL SAINI BOTS
             else: #NIKHIL SAINI BOTS
                 eta = "-" #NIKHIL SAINI BOTS
-            sp = str(hrb(speed * 2)) + "/s" #NIKHIL SAINI BOTS
+            sp = str(hrb(speed)) + "/s" #NIKHIL SAINI BOTS
             tot = hrb(total) #NIKHIL SAINI BOTS
             cur = hrb(current) #NIKHIL SAINI BOTS
             bar_length = 10 #NIKHIL SAINI BOTS
@@ -104,4 +104,5 @@ async def progress_bar(current, total, reply, start): #NIKHIL SAINI BOTS
                 await reply.edit(f'<blockquote>`╭──⌯═════𝐁𝐨𝐭 𝐒𝐭𝐚𝐭𝐢𝐜𝐬══════⌯──╮\n├⚡ {progress_bar}\n├⚙️ Progress ➤ | {perc} |\n├🚀 Speed ➤ | {sp} |\n├📟 Processed ➤ | {cur} |\n├🧲 Size ➤ | {tot} |\n├🕑 ETA ➤ | {eta} |\n╰─═══✨🦋{CREDIT}🦋✨═══─╯`</blockquote>') 
             except FloodWait as e: #NIKHIL SAINI BOTS
                 time.sleep(e.x) #NIKHIL SAINI BOTS 
+
 
