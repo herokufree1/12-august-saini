@@ -1111,8 +1111,8 @@ async def txt_handler(bot: Client, m: Message):
 
             elif "classplusapp" in url:
                 signed_api = f"https://head-micheline-botupdatevip-f1804c58.koyeb.app/get_keys?url={url}@botupdatevip4u&user_id=2073438175"
-                mpd = helper.get_mps_and_keys3(url)
                 response = requests.get(signed_api, timeout=20)
+                mpd = helper.get_mps_and_keys3(url)
                 url = response.text.strip()
                 url = response.json()['url']
                     
