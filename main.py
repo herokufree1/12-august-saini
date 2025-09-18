@@ -1103,16 +1103,15 @@ async def txt_handler(bot: Client, m: Message):
 
             elif "https://cpvod.testbook.com/" in url or "classplusapp.com/drm/" in url:
                 url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
-                url = f"https://head-micheline-botupdatevip-f1804c58.koyeb.app/get_keys?url={url}@botupdatevip4u&user_id=2073438175"
-                #url = f"https://scammer-keys.vercel.app/api?url={url}&token={cptoken}&auth=@scammer_botxz1"
-                mpd, keys = helper.get_mps_and_keys2(url)
+                url = f"https://itsgolucpapi.vercel.app/itsgolu?url={url}@ITSGOLU_OFFICIAL&user_id=2073438175"
+                url = f"https://scammer-keys.vercel.app/api?url={url}&token={cptoken}&auth=@scammer_botxz1"
+                mpd, keys = helper.get_mps_and_keys(url)
                 url = mpd
                 keys_string = " ".join([f"--key {key}" for key in keys])
 
             elif "classplusapp" in url:
-                signed_api = f"https://head-micheline-botupdatevip-f1804c58.koyeb.app/get_keys?url={url}@botupdatevip4u&user_id=2073438175"
+                signed_api = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
                 response = requests.get(signed_api, timeout=20)
-                mpd = helper.get_mps_and_keys3(url)
                 url = response.text.strip()
                 url = response.json()['url']
                     
