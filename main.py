@@ -1087,18 +1087,31 @@ async def txt_handler(bot: Client, m: Message):
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
 
+            elif "media-cdn.classplusapp.com/drm/" in url and "playlist.m3u8" in url:
+    # Extract the DRM content ID from URL
+                content_id = url.split('/drm/')[1].split('/')[0]
+                drm_url = f"https://media-cdn.classplusapp.com/drm/{content_id}/playlist.m3u8"
+    
+    # Use the key extraction API
+                api_url = f"https://covercel.vercel.app/extract_keys?url={drm_url}@bots_updatee&user_id=2073438175"
+    
+            try:
+               response = requests.get(api_url, timeout=20)
+               mpd, keys = helper.get_mps_and_keys(api_url)
+               url = mpd
+               keys_string = " ".join([f"--key {key}" for key in keys])
+
             elif "https://cpvod.testbook.com/" in url or "classplusapp.com/drm/" in url:
                 url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
-                url = f"https://head-micheline-botupdatevip-f1804c58.koyeb.app/get_keys?url={url}@botupdatevip4u&user_id=2073438175"
+                url = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
                 #url = f"https://scammer-keys.vercel.app/api?url={url}&token={cptoken}&auth=@scammer_botxz1"
-                mpd, keys = helper.get_mps_and_keys2(url)
+                mpd, keys = helper.get_mps_and_keys(url)
                 url = mpd
                 keys_string = " ".join([f"--key {key}" for key in keys])
 
             elif "classplusapp" in url:
-                signed_api = f"https://head-micheline-botupdatevip-f1804c58.koyeb.app/get_keys?url={url}@botupdatevip4u&user_id=2073438175"
+                signed_api = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
                 response = requests.get(signed_api, timeout=20)
-                mpd = helper.get_mps_and_keys3(url)
                 url = response.text.strip()
                 url = response.json()['url']  
                     
