@@ -1087,19 +1087,7 @@ async def txt_handler(bot: Client, m: Message):
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
 
-            elif "media-cdn.classplusapp.com/drm/" in url and "playlist.m3u8" in url:
-    # Extract the DRM content ID from URL
-                content_id = url.split('/drm/')[1].split('/')[0]
-                drm_url = f"https://media-cdn.classplusapp.com/drm/{content_id}/playlist.m3u8"
-    
-    # Use the key extraction API
-                api_url = f"https://covercel.vercel.app/extract_keys?url={drm_url}@bots_updatee&user_id=2073438175"
-    
-            try:
-               response = requests.get(api_url, timeout=20)
-               mpd, keys = helper.get_mps_and_keys(api_url)
-               url = mpd
-               keys_string = " ".join([f"--key {key}" for key in keys])
+            
 
             elif "https://cpvod.testbook.com/" in url or "classplusapp.com/drm/" in url:
                 url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
@@ -1129,6 +1117,20 @@ async def txt_handler(bot: Client, m: Message):
                 params = {"url": f"{url}"}
                 response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
                 url   = response.json()['url']
+
+            elif "media-cdn.classplusapp.com/drm/" in url and "playlist.m3u8" in url:
+    # Extract the DRM content ID from URL
+                content_id = url.split('/drm/')[1].split('/')[0]
+                drm_url = f"https://media-cdn.classplusapp.com/drm/{content_id}/playlist.m3u8"
+    # Use the key extraction API
+                api_url = f"https://covercel.vercel.app/extract_keys?url={drm_url}@bots_updatee&user_id=2073438175"
+                response = requests.get(api_url, timeout=20)
+                mpd, keys = helper.get_mps_and_keys(api_url)
+                url = mpd
+                keys_string = " ".join([f"--key {key}" for key in keys])
+
+
+            
 
             if "edge.api.brightcove.com" in url:
                 bcov = f'bcov_auth={cwtoken}'
