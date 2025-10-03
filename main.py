@@ -1087,22 +1087,19 @@ async def txt_handler(bot: Client, m: Message):
             if "acecwply" in url:
                 cmd = f'yt-dlp -o "{name}.%(ext)s" -f "bestvideo[height<={raw_text2}]+bestaudio" --hls-prefer-ffmpeg --no-keep-video --remux-video mkv --no-warning "{url}"'
 
-            
-
-            elif "https://cpvod.testbook.com/" in url or "classplusapp.com/drm/" in url:
+            elif "https://cpvod.testbook.com/" in url:
                 url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
-                url = f"https://itsgolucpapi.vercel.app/itsgolu?url={url}@ITSGOLU_OFFICIAL&user_id=2073438175"
-                #url = f"https://scammer-keys.vercel.app/api?url={url}&token={cptoken}&auth=@scammer_botxz1"
+                url = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
                 mpd, keys = helper.get_mps_and_keys(url)
                 url = mpd
                 keys_string = " ".join([f"--key {key}" for key in keys])
 
-            elif "classplusapp" in url:
-                signed_api = f"https://itsgolucpapi.vercel.app/itsgolu?url={url}@ITSGOLU_OFFICIAL&user_id=2073438175"
-                response = requests.get(signed_api, timeout=20)
-                url = response.text.strip()
-                url = response.json()['url']  
-                    
+            elif "classplusapp.com/drm/" in url:
+                url = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
+                mpd, keys = helper.get_mps_and_keys(url)
+                url = mpd
+                keys_string = " ".join([f"--key {key}" for key in keys])
+
             elif "tencdn.classplusapp" in url:
                 headers = {'host': 'api.classplusapp.com', 'x-access-token': f'{cptoken}', 'accept-language': 'EN', 'api-version': '18', 'app-version': '1.4.73.2', 'build-number': '35', 'connection': 'Keep-Alive', 'content-type': 'application/json', 'device-details': 'Xiaomi_Redmi 7_SDK-32', 'device-id': 'c28d3cb16bbdac01', 'region': 'IN', 'user-agent': 'Mobile-Android', 'webengage-luid': '00000187-6fe4-5d41-a530-26186858be4c', 'accept-encoding': 'gzip'}
                 params = {"url": f"{url}"}
@@ -1118,26 +1115,12 @@ async def txt_handler(bot: Client, m: Message):
                 response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
                 url   = response.json()['url']
 
-            elif "media-cdn.classplusapp.com/drm/" in url and "playlist.m3u8" in url:
-    # Extract the DRM content ID from URL
-                content_id = url.split('/drm/')[1].split('/')[0]
-                drm_url = f"https://media-cdn.classplusapp.com/drm/{content_id}/playlist.m3u8"
-    # Use the key extraction API
-                api_url = f"https://covercel.vercel.app/extract_keys?url={drm_url}@bots_updatee&user_id=2073438175"
-                response = requests.get(api_url, timeout=20)
-                mpd, keys = helper.get_mps_and_keys(api_url)
-                url = mpd
-                keys_string = " ".join([f"--key {key}" for key in keys])
-
-
-            
-
             if "edge.api.brightcove.com" in url:
                 bcov = f'bcov_auth={cwtoken}'
                 url = url.split("bcov_auth")[0]+bcov
                 
             elif "childId" in url and "parentId" in url:
-                url = f"https://anonymouspwplayer-0e5a3f512dec.herokuapp.com/pw?url={url}&token={pwtoken}"
+                url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={pwtoken}"
                            
             elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
                 url = f"https://anonymouspwplayer-b99f57957198.herokuapp.com/pw?url={url}?token={pwtoken}"
@@ -1164,7 +1147,6 @@ async def txt_handler(bot: Client, m: Message):
                 cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
             else:
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
-
             try:
                 if raw_text5 == "yes":
                     raw_title = links[i][0]
