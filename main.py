@@ -1322,7 +1322,7 @@ async def txt_handler(bot: Client, m: Message):
                     await asyncio.sleep(1)  
                     continue  
 
-                elif 'drmcdni' in url or 'drm/wv' in url:
+                elif 'drmcdni' in url or 'drm/wv' in url or 'drm/common' in url:
                     remaining_links = len(links) - count
                     progress = (count / len(links)) * 100
                     Show1 = f"<blockquote>🚀𝐏𝐫𝐨𝐠𝐫𝐞𝐬𝐬 » {progress:.2f}%</blockquote>\n┃\n" \
@@ -1478,14 +1478,14 @@ async def text_handler(bot: Client, m: Message):
 
             elif "https://cpvod.testbook.com/" in url or "classplusapp.com/drm/" in url:
                 url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
-                url = f"https://head-micheline-botupdatevip-f1804c58.koyeb.app/get_keys?url={url}@botupdatevip4u&user_id=2073438175"
+                url = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
                 #url = f"https://scammer-keys.vercel.app/api?url={url}&token={cptoken}&auth=@scammer_botxz1"
                 mpd, keys = helper.get_mps_and_keys2(url)
                 url = mpd
                 keys_string = " ".join([f"--key {key}" for key in keys])
 
             elif "classplusapp" in url:
-                signed_api = f"https://head-micheline-botupdatevip-f1804c58.koyeb.app/get_keys?url={url}@botupdatevip4u&user_id=2073438175"
+                signed_api = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
                 response = requests.get(signed_api, timeout=20)
                 mpd = helper.get_mps_and_keys3(url)
                 url = response.text.strip()
@@ -1642,7 +1642,7 @@ async def text_handler(bot: Client, m: Message):
                     await asyncio.sleep(1)  
                     pass
 
-                elif 'drmcdni' in url or 'drm/wv' in url:
+                elif 'drmcdni' in url or 'drm/wv' in url or 'drm/common' in url:
                     Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅɪɴɢ Sᴛᴀʀᴛᴇᴅ...⏳**\n" \
                            f"<blockquote expandable>🔗𝐋𝐢𝐧𝐤 » {url}</blockquote>\n" \
                            f"✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ {CREDIT}"
