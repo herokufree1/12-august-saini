@@ -1388,7 +1388,7 @@ async def text_handler(bot: Client, m: Message):
         return
     user_id = m.from_user.id
     links = m.text
-    path = None
+    path = f"./downloads/{m.chat.id}"
     match = re.search(r'https?://\S+', links)
     if match:
         link = match.group(0)
@@ -1466,12 +1466,11 @@ async def text_handler(bot: Client, m: Message):
                 url = mpd
                 keys_string = " ".join([f"--key {key}" for key in keys])
 
-            elif "classplusapp" in url:
-                signed_api = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
-                response = requests.get(signed_api, timeout=20)
-                mpd = helper.get_mps_and_keys(url)
-                url = response.text.strip()
-                url = response.json()['url']
+            elif "classplusapp.com/drm/" in url:
+                url = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
+                mpd, keys = helper.get_mps_and_keys(url)
+                url = mpd
+                keys_string = " ".join([f"--key {key}" for key in keys])
                 
             elif "tencdn.classplusapp" in url:
                 headers = {'host': 'api.classplusapp.com', 'x-access-token': f'{raw_text4}', 'accept-language': 'EN', 'api-version': '18', 'app-version': '1.4.73.2', 'build-number': '35', 'connection': 'Keep-Alive', 'content-type': 'application/json', 'device-details': 'Xiaomi_Redmi 7_SDK-32', 'device-id': 'c28d3cb16bbdac01', 'region': 'IN', 'user-agent': 'Mobile-Android', 'webengage-luid': '00000187-6fe4-5d41-a530-26186858be4c', 'accept-encoding': 'gzip'}
