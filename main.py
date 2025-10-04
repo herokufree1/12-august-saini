@@ -1462,14 +1462,14 @@ async def text_handler(bot: Client, m: Message):
                 url = url.replace("https://cpvod.testbook.com/","https://media-cdn.classplusapp.com/drm/")
                 url = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
                 #url = f"https://scammer-keys.vercel.app/api?url={url}&token={cptoken}&auth=@scammer_botxz1"
-                mpd, keys = helper.get_mps_and_keys2(url)
+                mpd, keys = helper.get_mps_and_keys(url)
                 url = mpd
                 keys_string = " ".join([f"--key {key}" for key in keys])
 
             elif "classplusapp" in url:
                 signed_api = f"https://covercel.vercel.app/extract_keys?url={url}@bots_updatee&user_id=2073438175"
                 response = requests.get(signed_api, timeout=20)
-                mpd = helper.get_mps_and_keys3(url)
+                mpd = helper.get_mps_and_keys(url)
                 url = response.text.strip()
                 url = response.json()['url']
                 
